@@ -1,3 +1,4 @@
+#pragma once
 #include <cassert>
 #include <cstddef>
 #include <string>
@@ -133,7 +134,7 @@ public:
     }
 
     SingleLinkedList(const SingleLinkedList& other) {
-       Copy(other.begin(), other.end());
+        Copy(other);
 
     }
 
@@ -280,7 +281,7 @@ private:
     size_t size_ = 0;
     
      template<class Container>
-    void Copy(Container container){
+    void Copy(const Container& container){
         Node* current = &head_;
         for(auto it = container.begin(); it != container.end(); it++){
             current->next_node = new Node(*it, nullptr);
@@ -288,16 +289,8 @@ private:
             size_++;
         }
     }
-    template<class Container>
-    void Copy(Container begin,Container end){
-        Node* current = &head_;
-        for(auto it = begin; it != end; it++){
-            current->next_node = new Node(*it, nullptr);
-            current = current->next_node;
-            size_++;
-        }
-    }
 };
+
 
 
 template <typename Type>
@@ -338,4 +331,3 @@ bool operator>=(const SingleLinkedList<Type>& lhs, const SingleLinkedList<Type>&
     return !(rhs > lhs);
 
 }
-
